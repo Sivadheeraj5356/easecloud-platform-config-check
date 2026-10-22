@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Platform Config Check</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Platform Config Check</h1>
+    <p class="sub">You ship it, you own it - so catch the config mistakes before production does. Paste config lines as <code>file | &lt;line&gt;</code> from Terraform, dbt, Airbyte, Docker or CI files, and the check flags hardcoded secrets, public access, unpinned versions, latest tags, wildcard selects and missing test/retry hints. Heuristic screen, not an audit.</p>
+  </header>
+
+  <section class="card">
+    <label class="lbl" for="cfg">Config lines, one per line: <code>file | &lt;line&gt;</code></label>
+    <textarea id="cfg" rows="9" spellcheck="false">main.tf | resource "aws_s3_bucket" "data" { acl = "public-read" }
+main.tf | version = "latest"
+models/orders.sql | select * from raw_orders
+sync.yml | name: airbyte daily sync
+Dockerfile | image: postgres:latest
+.env | DB_PASSWORD: hunter2example</textarea>
+
+    <button id="run" type="button">Run config check</button>
+  </section>
+
+  <section id="results" class="hidden">
+    <div class="card">
+      <h2>Findings <span id="stats" class="stats"></span></h2>
+      <ul id="findings" class="findings"></ul>
+    </div>
+  </section>
+
+  <footer>Plain HTML, CSS and JavaScript. No external services, build step or secrets. Tests: <code>npm test</code>.</footer>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
