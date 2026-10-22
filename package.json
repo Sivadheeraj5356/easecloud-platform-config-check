@@ -1,0 +1,7 @@
+{
+  "name": "easecloud-platform-config-check",
+  "version": "1.0.0",
+  "description": "Heuristic QA for cloud and data platform configs: hardcoded secrets, public access, unpinned versions, latest tags, wildcard selects, missing test/retry hints",
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}
